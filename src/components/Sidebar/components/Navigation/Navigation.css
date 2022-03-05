@@ -1,0 +1,21 @@
+.navigation {
+	font-size: 20px;
+	font-weight: 300;
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+.navigation img {
+	width: 20px;
+	height: 20px;
+}
+.navigation a {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 2px 2px;
+	border-radius: 5px;
+}
+.focus {
+	background-color: #01b0ef;
+}

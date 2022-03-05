@@ -1,0 +1,9 @@
+.sidebar {
+	height: 100vh;
+	background-color: #82d9c8;
+	width: 200px;
+	padding: 10px 10px;
+}
+.sidebar__title {
+	margin-bottom: 15px;
+}

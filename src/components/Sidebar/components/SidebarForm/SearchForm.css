@@ -1,0 +1,26 @@
+.search {
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+}
+.search__input {
+	background-color: #fff;
+	width: 149px;
+	height: 25px;
+	padding: 0px 5px 2px;
+	border-radius: 5px 0 0 5px;
+}
+.search__input::placeholder {
+	font-size: 14px;
+}
+.search__button {
+	width: 30px;
+	height: 25px;
+	background-color: #fff;
+	border-radius: 0 5px 5px 0;
+}
+.search__button img {
+	padding-top: 2px;
+	width: 15px;
+	height: 15px;
+}
