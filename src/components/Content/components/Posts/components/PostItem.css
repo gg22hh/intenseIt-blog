@@ -1,0 +1,18 @@
+.post__item {
+	max-width: 516px;
+}
+.post__item-image {
+	max-width: 280px;
+	margin-bottom: 25px;
+}
+.post__item-image img {
+	border-radius: 10px;
+}
+.post__item-title {
+	font-size: 20px;
+	margin-bottom: 25px;
+}
+.post__item-text {
+	color: rgb(88, 88, 88);
+	line-height: 25px;
+}

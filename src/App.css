@@ -54,7 +54,7 @@ a {
 }
 
 h1 {
-	font-size: 25px;
+	font-size: 30px;
 	font-weight: 500;
 }
 
@@ -62,8 +62,4 @@ h1 {
     outline: none;
 }
 
-.App {
-  text-align: center;
-  display: flex;
-}
 
