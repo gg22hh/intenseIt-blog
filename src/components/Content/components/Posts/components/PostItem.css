@@ -3,9 +3,11 @@
 }
 .post__item-image {
 	max-width: 280px;
+	height: 200px;
 	margin-bottom: 25px;
 }
 .post__item-image img {
+	height: 100%;
 	border-radius: 10px;
 }
 .post__item-title {
@@ -15,4 +17,11 @@
 .post__item-text {
 	color: rgb(88, 88, 88);
 	line-height: 25px;
+	margin-bottom: 10px;
+}
+.more {
+	margin-left: 5px;
+	color: dodgerblue;
+	text-decoration: underline;
+	display: inline;
 }

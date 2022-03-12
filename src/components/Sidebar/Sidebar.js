@@ -1,15 +1,21 @@
 import React from "react";
 import "./Sidebar.css";
-import { SearchForm } from './components/SidebarForm/SearchForm';
 import { Navigation } from './components/Navigation/Navigation';
+import { SidebarHeader } from './components/SidebarHeader/SidebarHeader';
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 
-export const Sidebar = () => {
+export const Sidebar = ({ setActive }) => {
     return (
         <aside className="sidebar">
-            <h1 className="sidebar__title">#App</h1>
-            <SearchForm />
+            <SidebarHeader />
             <Navigation />
+            <button onClick={() => setActive(false)} className="sidebar__btn">
+                <span>
+                    <ArrowBackIcon />
+                </span>
+                Выход
+            </button>
         </aside>
     );
 };
