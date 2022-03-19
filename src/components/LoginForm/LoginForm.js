@@ -1,25 +1,35 @@
-import React, { useState } from "react";
+import React, {useRef} from "react";
 import './LoginForm.css'
+import { usersData } from '../../shared/projectData';
 
 export const LoginForm = ({ setActive }) => {
-	const [login, setLogin] = useState('')
-	const [password, setPassword] = useState('')
+	const loginFormName = useRef()
+	const loginFormPassword = useRef()
 
-	const submitForm = () => {
-		if (login.length === 0 || password.length === 0) return
+	const handleLoginForm = (e) => {
+		e.preventDefault()
 		setActive(true)
+
+		const userData = {
+			userName: loginFormName.current.value,
+			password: loginFormPassword.current.value,
+		}
+
+		usersData.push(userData)
 	}
 
+	console.log(usersData)
+
     return (
-        <form className="form">
+        <form onSubmit={handleLoginForm} className="form">
             <h1>Вход</h1>
             <div>
                 <input
                     type="text"
                     className="form__login"
                     placeholder="Логин"
+					ref={loginFormName}
                     required
-                    onChange={(e) => setLogin(e.target.value)}
                 />
             </div>
             <div>
@@ -27,11 +37,11 @@ export const LoginForm = ({ setActive }) => {
                     type="password"
                     className="form__password"
                     placeholder="Пароль"
+					ref={loginFormPassword}
                     required
-                    onChange={(e) => setPassword(e.target.value)}
                 />
             </div>
-            <button type="submit" onClick={submitForm} className="form__btn">
+            <button type="submit" className="form__btn">
                 Отправить
             </button>
         </form>

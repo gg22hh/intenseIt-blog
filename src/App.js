@@ -5,7 +5,7 @@ import { Content } from "./components/Content/Content";
 import { LoginForm } from "./components/LoginForm/LoginForm";
 
 function App() {
-    const [active, setActive] = useState(false);
+    const [active, setActive] = useState(true);
 
     return (
         <div className="App">
