@@ -1,5 +1,6 @@
 .post__item {
 	max-width: 516px;
+	width: 100%;
 }
 .post__item-image {
 	max-width: 280px;

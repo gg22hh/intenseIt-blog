@@ -3,9 +3,11 @@ import "./Posts.css";
 import { posts } from "../../../../shared/projectData";
 import { PostItem } from "./components/PostItem";
 import { SearchForm } from "../SearchForm/SearchForm";
+import { AddNewPostForm } from './components/AddNewPostForm';
 
 export const Posts = () => {
     const [postsList, setPostsList] = useState(posts);
+	const [addNewPostForm, setAddNewPostForm] = useState(false)
 
     const blogPosts = postsList.map((item, position) => {
         return (
@@ -33,7 +35,8 @@ export const Posts = () => {
 
 	const deletePost = (position) => {
 		const updatedPost = [...postsList]
-		updatedPost.splice(position, 1)
+		const areYouSure = window.confirm(`Delete: ${updatedPost[position].title}`)
+		areYouSure && updatedPost.splice(position, 1);
 
 		setPostsList(updatedPost)
 	}
@@ -42,8 +45,22 @@ export const Posts = () => {
         <div className="posts">
             <div className="posts__header">
                 <h2 className="posts__title">Posts</h2>
+                <button
+                    onClick={() => setAddNewPostForm(true)}
+                    className="posts__addNewPost"
+                >
+                    Add new post
+                </button>
                 <SearchForm />
             </div>
+
+            {addNewPostForm && (
+                <AddNewPostForm
+                    setAddNewPostForm={setAddNewPostForm}
+                    setPostsList={setPostsList}
+                    postsList={postsList}
+                />
+            )}
 
             <div className="posts__inner">{blogPosts}</div>
         </div>
