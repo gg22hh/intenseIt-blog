@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { setToLocalStorage } from '../../../../../shared/projectFunctions';
 
 export const AddNewPostForm = ({ setAddNewPostForm, postsList, setPostsList }) => {
     const newPostTitle = useRef();
@@ -12,9 +13,10 @@ export const AddNewPostForm = ({ setAddNewPostForm, postsList, setPostsList }) =
             text: newPostText.current.value,
             liked: false,
         };
-		const updatedPosts = [...postsList]
-		updatedPosts.push(newPost)
-		setPostsList(updatedPosts)
+		const updatedPosts = [...postsList, newPost]
+		
+		setPostsList(updatedPosts);
+		setToLocalStorage(updatedPosts)
 		setAddNewPostForm(false)
     };
 

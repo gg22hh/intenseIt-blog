@@ -4,9 +4,12 @@ import { posts } from "../../../../shared/projectData";
 import { PostItem } from "./components/PostItem";
 import { SearchForm } from "../SearchForm/SearchForm";
 import { AddNewPostForm } from './components/AddNewPostForm';
+import { setToLocalStorage } from '../../../../shared/projectFunctions';
 
 export const Posts = () => {
-    const [postsList, setPostsList] = useState(posts);
+    const [postsList, setPostsList] = useState(
+		JSON.parse(localStorage.getItem('blogPosts')) || posts
+	);
 	const [addNewPostForm, setAddNewPostForm] = useState(false)
 
     const blogPosts = postsList.map((item, position) => {
@@ -33,6 +36,7 @@ export const Posts = () => {
             liked: !updatedPost[position].liked,
         };
 
+		setToLocalStorage(updatedPost)
 		setPostsList(updatedPost)
     };
 
@@ -41,6 +45,7 @@ export const Posts = () => {
 		const areYouSure = window.confirm(`Delete: ${updatedPost[position].title}`)
 		areYouSure && updatedPost.splice(position, 1);
 
+		setToLocalStorage(updatedPost);
 		setPostsList(updatedPost)
 	}
 

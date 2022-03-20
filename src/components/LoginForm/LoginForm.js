@@ -8,14 +8,15 @@ export const LoginForm = ({ setActive }) => {
 
 	const handleLoginForm = (e) => {
 		e.preventDefault()
-		setActive(true)
-
+		
 		const userData = {
 			userName: loginFormName.current.value,
 			password: loginFormPassword.current.value,
 		}
 
+		localStorage.setItem('isLogged', true)
 		usersData.push(userData)
+		setActive(true)
 	}
 
 	console.log(usersData)

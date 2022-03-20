@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { setToLocalStorage } from '../../../../../shared/projectFunctions';
 
 export const ChangePostForm = ({
     setActiveChangeForm,
@@ -23,6 +24,7 @@ export const ChangePostForm = ({
         };
 
 		setPostsList(updatedPosts)
+		setToLocalStorage(updatedPosts);
 		setActiveChangeForm(false)
     };
 

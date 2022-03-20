@@ -5,7 +5,7 @@ import { Content } from "./components/Content/Content";
 import { LoginForm } from "./components/LoginForm/LoginForm";
 
 function App() {
-    const [active, setActive] = useState(true);
+    const [active, setActive] = useState(localStorage.getItem('isLogged') === 'true');
 
     return (
         <div className="App">
