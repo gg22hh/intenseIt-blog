@@ -19,6 +19,9 @@ export const Posts = () => {
                 liked={item.liked}
                 setLike={() => setLike(position)}
                 deletePost={() => deletePost(position)}
+                position={position}
+                postsList={postsList}
+                setPostsList={setPostsList}
             />
         );
     });
