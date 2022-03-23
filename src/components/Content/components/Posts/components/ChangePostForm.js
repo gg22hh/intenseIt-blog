@@ -8,7 +8,7 @@ export const ChangePostForm = ({
     setPostsList,
 }) => {
 	const [title, setTitle] = useState(postsList[position].title)
-	const [text, setText] = useState(postsList[position].text)
+	const [text, setText] = useState(postsList[position].description)
 
     const changeTitle = useRef();
     const changeText = useRef();
@@ -20,7 +20,7 @@ export const ChangePostForm = ({
         updatedPosts[position] = {
             ...updatedPosts[position],
             title: changeTitle.current.value,
-			text: changeText.current.value
+			description: changeText.current.value
         };
 
 		setPostsList(updatedPosts)

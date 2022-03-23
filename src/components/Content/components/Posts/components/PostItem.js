@@ -30,6 +30,7 @@ export const PostItem = ({
             text
         );
 
+
     return (
         <>
             <div className="post__item">

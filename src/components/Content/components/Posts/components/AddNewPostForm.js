@@ -10,7 +10,7 @@ export const AddNewPostForm = ({ setAddNewPostForm, postsList, setPostsList }) =
         const newPost = {
             id: postsList.length + 1,
             title: newPostTitle.current.value,
-            text: newPostText.current.value,
+            description: newPostText.current.value,
             liked: false,
         };
 		const updatedPosts = [...postsList, newPost]

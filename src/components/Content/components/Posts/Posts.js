@@ -25,7 +25,7 @@ export const Posts = () => {
 	}, [])
 
     const blogPosts = postsList.map((item, position) => {
-        return (
+		return (
             <PostItem
                 key={item.id}
                 image={item.image}
