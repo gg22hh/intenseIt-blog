@@ -25,3 +25,6 @@
 .posts__addNewPost:hover {
 	box-shadow: 0px 2px 10px black;
 }
+.posts__loading {
+	margin: auto;
+}

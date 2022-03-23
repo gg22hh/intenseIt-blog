@@ -1,16 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Posts.css";
-import { posts } from "../../../../shared/projectData";
 import { PostItem } from "./components/PostItem";
 import { SearchForm } from "../SearchForm/SearchForm";
 import { AddNewPostForm } from './components/AddNewPostForm';
 import { setToLocalStorage } from '../../../../shared/projectFunctions';
+import loadingGif from '../../../../assets/images/loading.gif'
 
 export const Posts = () => {
-    const [postsList, setPostsList] = useState(
-		JSON.parse(localStorage.getItem('blogPosts')) || posts
-	);
+    const [postsList, setPostsList] = useState([]);
 	const [addNewPostForm, setAddNewPostForm] = useState(false)
+	const [isLoading, setIsLoading] = useState(true)
+
+	useEffect(() => {
+		setIsLoading(true)
+		const getPosts = async () => {
+			const response = await fetch(
+                "https://622a3b7fbe12fc4538b614ed.mockapi.io/intenseBlog/"
+            );
+			const json = await response.json()
+			setPostsList(json)
+			setIsLoading(false)
+		}
+		getPosts()
+	}, [])
 
     const blogPosts = postsList.map((item, position) => {
         return (
@@ -18,7 +30,7 @@ export const Posts = () => {
                 key={item.id}
                 image={item.image}
                 title={item.title}
-                text={item.text}
+                text={item.description}
                 liked={item.liked}
                 setLike={() => setLike(position)}
                 deletePost={() => deletePost(position)}
@@ -70,7 +82,14 @@ export const Posts = () => {
                 />
             )}
 
-            <div className="posts__inner">{blogPosts}</div>
+            <div className="posts__inner">
+				{
+					isLoading ? <img className='posts__loading' src={loadingGif} alt="" /> : blogPosts
+				}
+			
+
+				
+			</div>
         </div>
     );
 };

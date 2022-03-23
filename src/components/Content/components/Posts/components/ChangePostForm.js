@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { setToLocalStorage } from '../../../../../shared/projectFunctions';
 
 export const ChangePostForm = ({
@@ -27,6 +27,14 @@ export const ChangePostForm = ({
 		setToLocalStorage(updatedPosts);
 		setActiveChangeForm(false)
     };
+
+	useEffect(() => {
+		const handleEscape = (e) => {
+			if (e.key === 'Escape') setActiveChangeForm(false)
+		}
+		window.addEventListener('keyup', handleEscape)
+		return () => window.removeEventListener("keyup", handleEscape);
+	})
 
     return (
         <>
