@@ -2,38 +2,36 @@ import React, { useState, useEffect } from "react";
 import "./Posts.css";
 import { PostItem } from "./components/PostItem";
 import { SearchForm } from "../SearchForm/SearchForm";
-import { AddNewPostForm } from './components/AddNewPostForm';
-import { setToLocalStorage } from '../../../../shared/projectFunctions';
-import loadingGif from '../../../../assets/images/loading.gif'
+import { AddNewPostForm } from "./components/AddNewPostForm";
+import loadingGif from "../../../../assets/images/loading.gif";
+import { POSTS_URL } from "../../../../shared/projectData";
 
 export const Posts = () => {
     const [postsList, setPostsList] = useState([]);
-	const [addNewPostForm, setAddNewPostForm] = useState(false)
-	const [isLoading, setIsLoading] = useState(true)
+    const [addNewPostForm, setAddNewPostForm] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
-	useEffect(() => {
-		setIsLoading(true)
-		const getPosts = async () => {
-			const response = await fetch(
-                "https://622a3b7fbe12fc4538b614ed.mockapi.io/intenseBlog/"
-            );
-			const json = await response.json()
-			setPostsList(json)
-			setIsLoading(false)
-		}
-		getPosts()
-	}, [])
+    useEffect(() => {
+        setIsLoading(true);
+        const getPosts = async () => {
+            const response = await fetch(POSTS_URL);
+            const json = await response.json();
+            setPostsList(json);
+            setIsLoading(false);
+        };
+        getPosts();
+    }, []);
 
     const blogPosts = postsList.map((item, position) => {
-		return (
+        return (
             <PostItem
                 key={item.id}
                 image={item.image}
                 title={item.title}
                 text={item.description}
                 liked={item.liked}
-                setLike={() => setLike(position)}
-                deletePost={() => deletePost(position)}
+                setLike={() => setLike(item)}
+                deletePost={() => deletePost(item.id)}
                 position={position}
                 postsList={postsList}
                 setPostsList={setPostsList}
@@ -41,25 +39,47 @@ export const Posts = () => {
         );
     });
 
-    const setLike = (position) => {
-        const updatedPost = [...postsList];
-        updatedPost[position] = {
-            ...updatedPost[position],
-            liked: !updatedPost[position].liked,
-        };
+    const setLike = async (post) => {
+        const updatedPost = { ...post, liked: !post.liked };
 
-		setToLocalStorage(updatedPost)
-		setPostsList(updatedPost)
+        const response = await fetch(POSTS_URL + post.id, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updatedPost),
+        });
+
+        if (response.ok) {
+            const updatedPostFromServer = await response.json();
+            setPostsList(
+                postsList.map((post) => {
+                    if (post.id === updatedPostFromServer.id) {
+                        return updatedPostFromServer;
+                    }
+
+                    return post;
+                })
+            );
+        } else {
+            console.log(`${response.status} - ${response.statusText}`);
+        }
     };
 
-	const deletePost = (position) => {
-		const updatedPost = [...postsList]
-		const areYouSure = window.confirm(`Delete: ${updatedPost[position].title}`)
-		areYouSure && updatedPost.splice(position, 1);
+    const deletePost = async (postId) => {
+        const areYouSure = window.confirm("Are you sure?");
+        if (areYouSure) {
+            const response = await fetch(POSTS_URL + postId, {
+                method: "DELETE",
+            });
 
-		setToLocalStorage(updatedPost);
-		setPostsList(updatedPost)
-	}
+            if (response.ok) {
+                setPostsList(postsList.filter((post) => post.id !== postId));
+            } else {
+                console.log(`${response.status} - ${response.statusText}`);
+            }
+        }
+    };
 
     return (
         <div className="posts">
@@ -83,13 +103,12 @@ export const Posts = () => {
             )}
 
             <div className="posts__inner">
-				{
-					isLoading ? <img className='posts__loading' src={loadingGif} alt="" /> : blogPosts
-				}
-			
-
-				
-			</div>
+                {isLoading ? (
+                    <img className="posts__loading" src={loadingGif} alt="" />
+                ) : (
+                    blogPosts
+                )}
+            </div>
         </div>
     );
 };
