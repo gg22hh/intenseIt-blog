@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
+import { POSTS_URL } from '../../../../../shared/projectData';
 import { setToLocalStorage } from '../../../../../shared/projectFunctions';
 
 export const ChangePostForm = ({
@@ -13,18 +14,37 @@ export const ChangePostForm = ({
     const changeTitle = useRef();
     const changeText = useRef();
 
-    const changePost = (e) => {
+    const changePost = async (e) => {
         e.preventDefault();
 
         const updatedPosts = [...postsList];
-        updatedPosts[position] = {
+		updatedPosts[position] = {
             ...updatedPosts[position],
             title: changeTitle.current.value,
-			description: changeText.current.value
+            description: changeText.current.value,
         };
 
-		setPostsList(updatedPosts)
-		setToLocalStorage(updatedPosts);
+		const response = await fetch(POSTS_URL + updatedPosts[position].id, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updatedPosts[position]),
+        });
+
+		if (response.ok) {
+			const updatedPostFromServer = await response.json()
+			setPostsList(postsList.map(post => {
+				if (post.id === updatedPostFromServer.id) {
+					return updatedPostFromServer
+				}
+
+				return post
+			}))
+		} else {
+			console.log(`Error`)
+		}
+
 		setActiveChangeForm(false)
     };
 

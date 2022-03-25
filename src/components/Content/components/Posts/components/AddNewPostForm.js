@@ -1,22 +1,35 @@
 import React, { useRef, useEffect } from "react";
+import { POSTS_URL } from '../../../../../shared/projectData';
 import { setToLocalStorage } from '../../../../../shared/projectFunctions';
 
 export const AddNewPostForm = ({ setAddNewPostForm, postsList, setPostsList }) => {
     const newPostTitle = useRef();
     const newPostText = useRef();
 
-    const addNewPost = (e) => {
+    const addNewPost = async (e) => {
         e.preventDefault();
         const newPost = {
-            id: postsList.length + 1,
             title: newPostTitle.current.value,
             description: newPostText.current.value,
             liked: false,
         };
-		const updatedPosts = [...postsList, newPost]
+		// const updatedPosts = [...postsList, newPost]
 		
-		setPostsList(updatedPosts);
-		setToLocalStorage(updatedPosts)
+		const response = await fetch(POSTS_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newPost)
+        });
+
+		if (response.ok) {
+			const newPostToServer = await response.json()
+			setPostsList([...postsList, newPostToServer])
+		} else {
+			console.log('error')
+		}
+
 		setAddNewPostForm(false)
     };
 
