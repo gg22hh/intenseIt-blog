@@ -1,26 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Posts.css";
 import { PostItem } from "./components/PostItem";
 import { SearchForm } from "../SearchForm/SearchForm";
 import { AddNewPostForm } from "./components/AddNewPostForm";
 import loadingGif from "../../../../assets/images/loading.gif";
 import { POSTS_URL } from "../../../../shared/projectData";
+import { useGetPosts } from "../../../../shared/hooks";
+import { deleteData, likePost } from "../../../../shared/projectFunctions";
 
 export const Posts = () => {
-    const [postsList, setPostsList] = useState([]);
     const [addNewPostForm, setAddNewPostForm] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
-        setIsLoading(true);
-        const getPosts = async () => {
-            const response = await fetch(POSTS_URL);
-            const json = await response.json();
-            setPostsList(json);
-            setIsLoading(false);
-        };
-        getPosts();
-    }, []);
+    const [postsList, setPostsList, isLoading] = useGetPosts(POSTS_URL);
+    const setLike = (post) => {
+        likePost(post, POSTS_URL, setPostsList, postsList);
+    };
+    const deletePost = (postId) => {
+        deleteData(postId, POSTS_URL, setPostsList, postsList);
+    };
 
     const blogPosts = postsList.map((item, position) => {
         return (
@@ -38,48 +35,6 @@ export const Posts = () => {
             />
         );
     });
-
-    const setLike = async (post) => {
-        const updatedPost = { ...post, liked: !post.liked };
-
-        const response = await fetch(POSTS_URL + post.id, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(updatedPost),
-        });
-
-        if (response.ok) {
-            const updatedPostFromServer = await response.json();
-            setPostsList(
-                postsList.map((post) => {
-                    if (post.id === updatedPostFromServer.id) {
-                        return updatedPostFromServer;
-                    }
-
-                    return post;
-                })
-            );
-        } else {
-            console.log(`${response.status} - ${response.statusText}`);
-        }
-    };
-
-    const deletePost = async (postId) => {
-        const areYouSure = window.confirm("Are you sure?");
-        if (areYouSure) {
-            const response = await fetch(POSTS_URL + postId, {
-                method: "DELETE",
-            });
-
-            if (response.ok) {
-                setPostsList(postsList.filter((post) => post.id !== postId));
-            } else {
-                console.log(`${response.status} - ${response.statusText}`);
-            }
-        }
-    };
 
     return (
         <div className="posts">
