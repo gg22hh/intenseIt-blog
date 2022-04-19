@@ -1,22 +1,44 @@
 import { useState } from "react";
 import "./App.css";
-import { Sidebar } from "./components/Sidebar/Sidebar";
-import { Content } from "./components/Content/Content";
-import { LoginForm } from "./components/LoginForm/LoginForm";
+import {
+    Redirect,
+    Route,
+    Switch,
+} from "react-router-dom/cjs/react-router-dom.min";
+import { LoginForm } from "./pages/LoginForm/LoginForm";
+import { Main } from "./pages/Main/Main";
 
 function App() {
-    const [active, setActive] = useState(localStorage.getItem('isLogged') === 'true');
+    const [active, setActive] = useState(
+        localStorage.getItem("isLogged") === "true"
+    );
 
     return (
         <div className="App">
-            {active ? (
-                <>
-                    <Sidebar setActive={setActive} />
-                    <Content />
-                </>
-            ) : (
-                <LoginForm setActive={setActive} />
-            )}
+            <Switch>
+                <Route exact path="/">
+                    {active ? (
+                        <Redirect to="/blog" />
+                    ) : (
+                        <Redirect to="/login" />
+                    )}
+                </Route>
+                <Route
+                    exact
+                    path="/login"
+                    render={() => {
+                        if (active) return <Redirect to="/blog" />;
+                        return <LoginForm setActive={setActive} />;
+                    }}
+                />
+                <Route
+                    path="/"
+                    render={() => {
+                        if (!active) return <Redirect to="/login" />;
+                        return <Main setActive={setActive} />;
+                    }}
+                />
+            </Switch>
         </div>
     );
 }

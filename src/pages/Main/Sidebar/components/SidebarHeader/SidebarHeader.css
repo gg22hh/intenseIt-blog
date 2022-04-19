@@ -1,0 +1,20 @@
+.sidebar__header {
+    height: 250px;
+    background: url(../../../../../assets/images/sidebar-bg.jpg) no-repeat
+        center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.sidebar__header-avatar {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    background: url(../../../../../assets/images/sidebar-avatar.jpeg) center;
+    background-size: cover;
+    margin-bottom: 20px;
+}
+.sidebar__header-name {
+    font-size: 30px;
+}

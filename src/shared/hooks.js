@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 export const useGetPosts = (url) => {
-    const [list, setList] = useState([]);
+    const [postsList, setList] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
@@ -19,5 +19,24 @@ export const useGetPosts = (url) => {
         getPosts();
     }, [url]);
 
-    return [list, setList, isLoading];
+    return [postsList, setList, isLoading];
+};
+
+export const useGet = (url) => {
+    const [list, setList] = useState([]);
+
+    useEffect(() => {
+        const getPosts = async () => {
+            const response = await fetch(url);
+            if (response.ok) {
+                const json = await response.json();
+                setList(json);
+            } else {
+                console.log("error");
+            }
+        };
+        getPosts();
+    }, [url]);
+
+    return list;
 };

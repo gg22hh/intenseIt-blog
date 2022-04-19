@@ -1,10 +1,10 @@
-import React, {useState} from "react";
-import { NO_IMAGE } from "../../../../../shared/projectData";
+import React, { useState } from "react";
+import { NO_IMAGE } from "../../../../../../shared/projectData";
 import "./PostItem.css";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
-import { ChangePostForm } from './ChangePostForm';
+import { ChangePostForm } from "./ChangePostForm";
 
 export const PostItem = ({
     image = NO_IMAGE,
@@ -15,7 +15,8 @@ export const PostItem = ({
     deletePost,
     position,
     postsList,
-	setPostsList
+    setPostsList,
+    isLikedPost,
 }) => {
     const [activeChangeForm, setActiveChangeForm] = useState(false);
     const color = liked ? "crimson" : "black";
@@ -29,7 +30,6 @@ export const PostItem = ({
         ) : (
             text
         );
-
 
     return (
         <>
@@ -57,6 +57,7 @@ export const PostItem = ({
                     position={position}
                     postsList={postsList}
                     setPostsList={setPostsList}
+                    isLikedPost={isLikedPost}
                 />
             )}
         </>
