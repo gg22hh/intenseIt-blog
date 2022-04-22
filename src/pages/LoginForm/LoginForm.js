@@ -1,25 +1,23 @@
-import React, {useRef} from "react";
-import './LoginForm.css'
-import { usersData } from '../../shared/projectData';
+import React, { useRef } from "react";
+import "./LoginForm.css";
+import { usersData } from "../../shared/projectData";
 
 export const LoginForm = ({ setActive }) => {
-	const loginFormName = useRef()
-	const loginFormPassword = useRef()
+    const loginFormName = useRef();
+    const loginFormPassword = useRef();
 
-	const handleLoginForm = (e) => {
-		e.preventDefault()
-		
-		const userData = {
-			userName: loginFormName.current.value,
-			password: loginFormPassword.current.value,
-		}
+    const handleLoginForm = (e) => {
+        e.preventDefault();
 
-		localStorage.setItem('isLogged', true)
-		usersData.push(userData)
-		setActive(true)
-	}
+        const userData = {
+            userName: loginFormName.current.value,
+            password: loginFormPassword.current.value,
+        };
 
-	console.log(usersData)
+        localStorage.setItem("isLogged", true);
+        usersData.push(userData);
+        setActive(true);
+    };
 
     return (
         <form onSubmit={handleLoginForm} className="form">
@@ -29,7 +27,7 @@ export const LoginForm = ({ setActive }) => {
                     type="text"
                     className="form__login"
                     placeholder="Логин"
-					ref={loginFormName}
+                    ref={loginFormName}
                     required
                 />
             </div>
@@ -38,7 +36,7 @@ export const LoginForm = ({ setActive }) => {
                     type="password"
                     className="form__password"
                     placeholder="Пароль"
-					ref={loginFormPassword}
+                    ref={loginFormPassword}
                     required
                 />
             </div>

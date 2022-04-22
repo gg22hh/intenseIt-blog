@@ -9,14 +9,14 @@ export const PrivateRoute = ({
     exact = false,
     children,
     active,
-    blogPostsRoutes,
+    blogPostRoutes,
 }) => {
     return (
         <Route
             path={path}
             exact={exact}
             render={({ location }) => {
-                const allRoutes = [...APP_ROUTES, ...blogPostsRoutes];
+                const allRoutes = [...APP_ROUTES, ...blogPostRoutes];
                 const isRouteExists = allRoutes.some(
                     (route) => route === location.pathname
                 );

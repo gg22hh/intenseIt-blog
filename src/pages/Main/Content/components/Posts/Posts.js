@@ -16,7 +16,7 @@ export const Posts = ({
 }) => {
     const [addNewPostForm, setAddNewPostForm] = useState(false);
 
-    const likedPosts = postsList.filter((item) => item.liked);
+    const likedPosts = postsList?.filter((item) => item.liked);
 
     const setLike = (post) => {
         likePost(post, POSTS_URL, setPostsList, postsList);
@@ -25,7 +25,7 @@ export const Posts = ({
         deleteData(postId, POSTS_URL, setPostsList, postsList);
     };
 
-    const blogPosts = (isLikedPost ? likedPosts : postsList).map(
+    const blogPosts = (isLikedPost ? likedPosts : postsList)?.map(
         (item, position) => {
             return (
                 <PostItem
