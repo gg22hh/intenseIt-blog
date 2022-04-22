@@ -29,6 +29,40 @@ export const likePost = async (post, url, setPostsList, postsList) => {
     }
 };
 
+export const likeSinglePost = async (
+    post,
+    url,
+    setPostsList,
+    postsList,
+    setPostList
+) => {
+    const updatedPost = { ...post, liked: !post.liked };
+
+    const response = await fetch(url + post.id, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedPost),
+    });
+
+    if (response.ok) {
+        const updatedPostFromServer = await response.json();
+        setPostList(updatedPostFromServer);
+        setPostsList(
+            postsList.map((post) => {
+                if (post.id === updatedPostFromServer.id) {
+                    return updatedPostFromServer;
+                }
+
+                return post;
+            })
+        );
+    } else {
+        console.log(`${response.status} - ${response.statusText}`);
+    }
+};
+
 export const deleteData = async (postId, url, setPostsList, postsList) => {
     const areYouSure = window.confirm("Are you sure?");
     if (areYouSure) {

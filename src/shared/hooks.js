@@ -40,3 +40,25 @@ export const useGet = (url) => {
 
     return list;
 };
+
+export const useGetSinglePost = (url, postId) => {
+    const [postList, setPostList] = useState({});
+    const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        setIsLoading(true);
+        const getSinglePost = async () => {
+            const response = await fetch(url + postId);
+            if (response.ok) {
+                const json = await response.json();
+                setPostList(json);
+                setIsLoading(false);
+            } else {
+                console.log("error");
+            }
+        };
+        getSinglePost();
+    }, [postId, url]);
+
+    return [postList, setPostList, isLoading];
+};

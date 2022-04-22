@@ -1,10 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import {
-    Redirect,
-    Route,
-    Switch,
-} from "react-router-dom/cjs/react-router-dom.min";
+import { Switch } from "react-router-dom/cjs/react-router-dom.min";
 import { LoginForm } from "./pages/LoginForm/LoginForm";
 import { Main } from "./pages/Main/Main";
 import { useGetPosts } from "./shared/hooks";

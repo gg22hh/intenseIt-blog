@@ -5,6 +5,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
 import { ChangePostForm } from "./ChangePostForm";
+import { Link } from "react-router-dom";
 
 export const PostItem = ({
     image = NO_IMAGE,
@@ -17,6 +18,7 @@ export const PostItem = ({
     postsList,
     setPostsList,
     isLikedPost,
+    id,
 }) => {
     const [activeChangeForm, setActiveChangeForm] = useState(false);
     const color = liked ? "crimson" : "black";
@@ -25,10 +27,17 @@ export const PostItem = ({
         text.length > 180 ? (
             <>
                 <span>{text.slice(0, 181)}...</span>
-                <button className="more">Подробнее</button>
+                <Link to={`/blog/${id}`} className="more">
+                    Подробнее
+                </Link>
             </>
         ) : (
-            text
+            <>
+                {text}
+                <Link to={`/blog/${id}`} className="more">
+                    Подробнее
+                </Link>
+            </>
         );
 
     return (

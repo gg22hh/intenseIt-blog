@@ -29,6 +29,7 @@ export const Posts = ({
         (item, position) => {
             return (
                 <PostItem
+                    id={item.id}
                     key={item.id}
                     image={item.image}
                     title={item.title}

@@ -4,6 +4,7 @@ import { Posts } from "./components/Posts/Posts";
 import { Route } from "react-router-dom/cjs/react-router-dom.min";
 import { Switch } from "react-router-dom";
 import { Redirect } from "react-router-dom";
+import { BlogPostPage } from "./components/BlogPostPage/BlogPostPage";
 
 export const Content = ({ postsData }) => {
     const [postsList, setPostsList, isLoading] = postsData;
@@ -25,6 +26,12 @@ export const Content = ({ postsData }) => {
                         postsList={postsList}
                         setPostsList={setPostsList}
                         isLoading={isLoading}
+                    />
+                </Route>
+                <Route path="/blog/:postId">
+                    <BlogPostPage
+                        postsList={postsList}
+                        setPostsList={setPostsList}
                     />
                 </Route>
                 <Route exact path="/">
