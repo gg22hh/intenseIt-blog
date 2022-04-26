@@ -1,16 +1,18 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Route } from "react-router-dom";
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import { NoMatch } from "../../pages/NoMatch/NoMatch";
 import { APP_ROUTES } from "../../shared/projectData";
+import { selectIsLoggedIn } from "../../store/slices/auth";
 
 export const PrivateRoute = ({
     path,
     exact = false,
     children,
-    active,
     blogPostRoutes,
 }) => {
+    const active = useSelector(selectIsLoggedIn);
     return (
         <Route
             path={path}

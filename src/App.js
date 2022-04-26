@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./App.css";
 import { Switch } from "react-router-dom/cjs/react-router-dom.min";
 import { LoginForm } from "./pages/LoginForm/LoginForm";
@@ -9,10 +8,6 @@ import { PublicRoute } from "./components/PublicRoute/PublicRoute";
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
 
 function App() {
-    const [active, setActive] = useState(
-        localStorage.getItem("isLogged") === "true"
-    );
-
     const postsData = useGetPosts(POSTS_URL);
 
     const blogPostRoutes = postsData[0]?.map((item) => {
@@ -25,18 +20,12 @@ function App() {
                 <PublicRoute
                     exact
                     path="/login"
-                    active={active}
                     blogPostRoutes={blogPostRoutes}
                 >
-                    <LoginForm setActive={setActive} />
+                    <LoginForm />
                 </PublicRoute>
-                <PrivateRoute
-                    path="/"
-                    active={active}
-                    setActive={setActive}
-                    blogPostRoutes={blogPostRoutes}
-                >
-                    <Main setActive={setActive} postsData={postsData} />
+                <PrivateRoute path="/" blogPostRoutes={blogPostRoutes}>
+                    <Main postsData={postsData} />
                 </PrivateRoute>
             </Switch>
         </div>

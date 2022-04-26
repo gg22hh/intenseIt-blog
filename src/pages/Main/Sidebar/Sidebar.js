@@ -4,13 +4,16 @@ import { Navigation } from "./components/Navigation/Navigation";
 import { SidebarHeader } from "./components/SidebarHeader/SidebarHeader";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useDispatch } from "react-redux";
+import { logOut } from "../../../store/slices/auth";
 
-export const Sidebar = ({ setActive }) => {
+export const Sidebar = () => {
     const history = useHistory();
 
-    const logOut = () => {
-        localStorage.removeItem("isLogged");
-        setActive(false);
+    const dispatch = useDispatch();
+
+    const handleLogOut = () => {
+        dispatch(logOut());
         history.push("/login");
     };
 
@@ -18,7 +21,7 @@ export const Sidebar = ({ setActive }) => {
         <aside className="sidebar">
             <SidebarHeader />
             <Navigation />
-            <button onClick={logOut} className="sidebar__btn">
+            <button onClick={handleLogOut} className="sidebar__btn">
                 <span>
                     <ArrowBackIcon />
                 </span>

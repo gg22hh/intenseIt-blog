@@ -2,10 +2,10 @@ import React from "react";
 import { Content } from "./Content/Content";
 import { Sidebar } from "./Sidebar/Sidebar";
 
-export const Main = ({ setActive, postsData }) => {
+export const Main = ({ postsData }) => {
     return (
         <div>
-            <Sidebar setActive={setActive} />
+            <Sidebar />
             <Content postsData={postsData} />
         </div>
     );
