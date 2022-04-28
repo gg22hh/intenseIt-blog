@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { logIn } from "../store/slices/auth";
 
 export const useGetPosts = (url) => {
     const [postsList, setList] = useState([]);
@@ -61,4 +63,88 @@ export const useGetSinglePost = (url, postId) => {
     }, [postId, url]);
 
     return [postList, setPostList, isLoading];
+};
+
+export const useLoginValidation = () => {
+    const [loginValidationLength, setLoginValidationLength] = useState(false);
+    const [loginValidationNumbers, setLoginValidationNumbers] = useState(false);
+    const [passwordLength, setPasswordLength] = useState(false);
+    const [passwordNumber, setPasswordNumber] = useState(false);
+    const [passwordСapital, setPasswordCapital] = useState(false);
+    const [passwordLower, setPasswordLower] = useState(false);
+    const [passwordUnderline, setPasswordUnderline] = useState(false);
+    const [userData, setUserData] = useState({
+        login: "",
+        password: "",
+    });
+
+    const dispatch = useDispatch();
+
+    const handleLoginForm = (e) => {
+        e.preventDefault();
+        if (
+            loginValidationLength &&
+            loginValidationNumbers &&
+            passwordLength &&
+            passwordNumber &&
+            passwordСapital &&
+            passwordLower &&
+            passwordUnderline
+        ) {
+            dispatch(logIn());
+        }
+
+        console.log(userData);
+    };
+
+    const handleLoginChange = (e) => {
+        setUserData({ ...userData, login: e.target.value });
+        e.target.value.length >= 4
+            ? setLoginValidationLength(true)
+            : setLoginValidationLength(false);
+        /^[a-zA-Z1-9]+$/.test(e.target.value) === true
+            ? setLoginValidationNumbers(true)
+            : setLoginValidationNumbers(false);
+    };
+
+    const handlePasswordChange = (e) => {
+        setUserData({ ...userData, password: e.target.value });
+        e.target.value.length >= 6
+            ? setPasswordLength(true)
+            : setPasswordLength(false);
+        /[1-9]/.test(e.target.value) === true
+            ? setPasswordNumber(true)
+            : setPasswordNumber(false);
+        /[A-Z]/.test(e.target.value) === true
+            ? setPasswordCapital(true)
+            : setPasswordCapital(false);
+        /[a-z]/.test(e.target.value) === true
+            ? setPasswordLower(true)
+            : setPasswordLower(false);
+        /_/.test(e.target.value) === true
+            ? setPasswordUnderline(true)
+            : setPasswordUnderline(false);
+    };
+
+    const loginLengthColor = loginValidationLength ? "green" : "red";
+    const loginNumbersColor = loginValidationNumbers ? "green" : "red";
+    const passwordLengthColor = passwordLength ? "green" : "red";
+    const passwordNumberColor = passwordNumber ? "green" : "red";
+    const passwordСapitalColor = passwordСapital ? "green" : "red";
+    const passwordLowerColor = passwordLower ? "green" : "red";
+    const passwordUnderlineColor = passwordUnderline ? "green" : "red";
+
+    return {
+        handleLoginForm,
+        handleLoginChange,
+        handlePasswordChange,
+        userData,
+        loginLengthColor,
+        loginNumbersColor,
+        passwordLengthColor,
+        passwordNumberColor,
+        passwordСapitalColor,
+        passwordLowerColor,
+        passwordUnderlineColor,
+    };
 };

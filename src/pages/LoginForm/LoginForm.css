@@ -3,20 +3,20 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -80%);
-    width: 300px;
+    width: 400px;
     text-align: center;
-	padding: 45px 15px;
-	border-radius: 5px;
-	border: 1px solid gray;
-	box-shadow: 5px 15px 5px gray;
-	background-color: #fff;
-	z-index: 10;
+    padding: 45px 15px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    box-shadow: 5px 15px 5px gray;
+    background-color: #fff;
+    z-index: 10;
 }
 .form__close {
-	position: absolute;
-	top: 15px;
-	right: 15px;
-	font-size: 25px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 25px;
 }
 .form h1 {
     font-size: 30px;
@@ -35,27 +35,34 @@
     padding: 5px 10px;
     border: 1px solid gray;
     border-radius: 5px;
-	outline: none;
+    outline: none;
 }
 .form__btn {
-	margin: 0 auto;
-	padding: 5px 20px;
-	background-color: rgb(78, 78, 78);
-	color: white;
-	border-radius: 8px;
-	border: 1px solid rgb(78, 78, 78);
-	transition: all .3s;
+    margin: 0 auto;
+    padding: 5px 20px;
+    background-color: rgb(78, 78, 78);
+    color: white;
+    border-radius: 8px;
+    border: 1px solid rgb(78, 78, 78);
+    transition: all 0.3s;
 }
 .form__btn:hover {
-	background-color: unset;
-	color: rgb(78, 78, 78);
+    background-color: unset;
+    color: rgb(78, 78, 78);
 }
 .overlay {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100vw;
-	height: 100vh;
-	background-color: rgba(0, 0, 0, 0.445);
-	z-index: 5;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.445);
+    z-index: 5;
+}
+.validation {
+    font-weight: bold;
+    list-style: disc;
+    text-align: left;
+    max-width: 320px;
+    margin: 0 auto 10px;
 }
