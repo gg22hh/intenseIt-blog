@@ -51,4 +51,4 @@ export const usersData = [];
 export const POSTS_URL =
     "https://622a3b7fbe12fc4538b614ed.mockapi.io/intenseBlog/";
 
-export const APP_ROUTES = ["/", "/login", "/blog", "/favourites"];
+export const APP_ROUTES = ["/", "/login", "/blog", "/favourites", "/account"];

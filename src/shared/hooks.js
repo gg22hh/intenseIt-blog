@@ -78,6 +78,8 @@ export const useLoginValidation = () => {
         password: "",
     });
 
+    localStorage.setItem("user", userData.login);
+
     const dispatch = useDispatch();
 
     const handleLoginForm = (e) => {

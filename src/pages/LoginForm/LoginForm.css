@@ -11,6 +11,8 @@
     box-shadow: 5px 15px 5px gray;
     background-color: #fff;
     z-index: 10;
+    animation-name: loginAdd;
+    animation-duration: 1s;
 }
 .form__close {
     position: absolute;
@@ -65,4 +67,15 @@
     text-align: left;
     max-width: 320px;
     margin: 0 auto 10px;
+}
+
+@keyframes loginAdd {
+    0% {
+        transform: translate(-50%, -10%);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(-50%, -80%);
+        opacity: 1;
+    }
 }

@@ -1,0 +1,19 @@
+.account {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: accountAdd 1s;
+}
+.login {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+@keyframes accountAdd {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}

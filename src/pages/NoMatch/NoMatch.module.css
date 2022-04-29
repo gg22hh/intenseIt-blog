@@ -2,8 +2,9 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -80%);
     max-width: 320px;
+    animation: noMatchAdd 1s;
 }
 .title {
     font-size: 40px;
@@ -27,4 +28,15 @@
 .button:hover {
     background-color: #fff;
     color: #000;
+}
+
+@keyframes noMatchAdd {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, 50%);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -80%);
+    }
 }

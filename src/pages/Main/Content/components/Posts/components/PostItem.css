@@ -1,33 +1,46 @@
 .post__item {
-	max-width: 516px;
-	width: 100%;
+    max-width: 516px;
+    width: 100%;
+    animation-name: add;
+    animation-duration: 1s;
 }
 .post__item-image {
-	max-width: 280px;
-	height: 200px;
-	margin-bottom: 25px;
+    max-width: 280px;
+    height: 200px;
+    margin-bottom: 25px;
 }
 .post__item-image img {
-	height: 100%;
-	border-radius: 10px;
+    height: 100%;
+    border-radius: 10px;
 }
 .post__item-title {
-	font-size: 20px;
-	margin-bottom: 25px;
+    font-size: 20px;
+    margin-bottom: 25px;
 }
 .post__item-text {
-	color: rgb(88, 88, 88);
-	line-height: 25px;
-	margin-bottom: 10px;
+    color: rgb(88, 88, 88);
+    line-height: 25px;
+    margin-bottom: 10px;
 }
 .post__item-buttons {
-	display: flex;
-	align-items: center;
-	gap: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 .more {
-	margin-left: 5px;
-	color: dodgerblue;
-	text-decoration: underline;
-	display: inline;
+    margin-left: 5px;
+    color: dodgerblue;
+    text-decoration: underline;
+    display: inline;
+}
+
+@keyframes add {
+    0% {
+        transform: translateY(50%);
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
 }
