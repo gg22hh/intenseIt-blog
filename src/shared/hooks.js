@@ -148,3 +148,23 @@ export const useLoginValidation = () => {
         passwordUnderlineColor,
     };
 };
+
+export const useLiveSearch = (posts, likedPosts) => {
+    const [value, setValue] = useState("");
+
+    const filtredPostsList = posts.filter((item) => {
+        return (
+            item.title.toLowerCase().includes(value.toLowerCase()) ||
+            item.description.toLowerCase().includes(value.toLowerCase())
+        );
+    });
+
+    const filtredLikedPostsList = likedPosts.filter((item) => {
+        return (
+            item.title.toLowerCase().includes(value.toLowerCase()) ||
+            item.description.toLowerCase().includes(value.toLowerCase())
+        );
+    });
+
+    return { value, setValue, filtredPostsList, filtredLikedPostsList };
+};
